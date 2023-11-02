@@ -7,211 +7,164 @@
 */
 
 @font-face {
-    font-family: 'Oswald';
-    src: url('oswald.woff2') format('woff2'),
+	font-family: "Oswald";
+	src: url("oswald.woff2") format("woff2");
 }
 
 html {
-    background-image: url("background.png");
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    font-family: 'Oswald', sans-serif;
-    height: 100%;
-
+	background-image: url("background.png");
+	background-size: cover;
+	background-position: center;
+	margin: 0;
+	font-family: "Oswald", sans-serif;
+	height: 100%;
 }
 
 body {
-    background-color: rgba(244, 241, 222, 0.4);
-
+	background-color: rgba(244, 241, 222, 0.4);
 }
 
-header {
-    background-color: rgb(61, 64, 91);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-h1 {
-    margin: 0;
-}
-
-.register-button {
-    background-color: rgb(224, 122, 95);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.register-button:hover {
-    background-color: rgb(168, 130, 221);
-}
-
-#content {
-    background-color:  rgba(244, 241, 222, 0.4);
-    padding: 40px;
-    margin: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-form {
-    margin: 0 auto;
-    max-width: 600px;
-    text-align: center;
-}
-
-h2 {
-    color: rgb(61, 64, 91);
+a {
+	text-decoration: none;
+	color: inherit;
 }
 
 label {
-    display: block;
-    margin-top: 10px;
+	font-size: 30px;
+}
+
+header {
+	background-image: linear-gradient(
+		to right,
+		rgb(61, 64, 91),
+		rgb(119, 126, 186),
+		rgb(61, 64, 91)
+	);
+	color: white;
+	text-align: center;
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+h1 {
+	font-size: 60px;
+	text-shadow: 2px 3px 4px rgb(224, 122, 95);
+}
+
+.register-button {
+	background-color: rgb(224, 122, 95);
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color, padding 0.5s;
+}
+
+.register-button:hover {
+	background-color: rgb(168, 130, 221);
+	padding: 20px 30px;
+}
+
+#content {
+	background-color: rgba(244, 241, 222, 0.4);
+	padding: 40px;
+	margin: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+form {
+	margin: 0 auto;
+	max-width: 600px;
+	text-align: center;
+}
+
+h2 {
+	color: rgb(61, 64, 91);
+	animation-duration: 1s;
+	animation-name: size;
+	font-size: 40px;
+	animation-iteration-count: infinite;
+	top: 20%}
+
+@keyframes size {
+	0% {
+		font-size: 40px;
+	}
+	20% {
+		font-size: 42px;
+	}
+	100% {
+		font-size: 40px;
+	}
+}
+
+label {
+	display: block;
+	margin-top: 10px;
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid rgb(61, 64, 91);
-    border-radius: 5px;
+	width: 100%;
+	padding: 10px;
+	margin: 5px 0;
+	border: 1px solid rgb(61, 64, 91);
+	border-radius: 5px;
 }
 
 input[type="radio"] {
-    margin: 5px;
+	margin: 5px;
 }
 
 input[type="submit"] {
-    background-color: rgb(224, 122, 95);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 30px;
+	background-color: rgb(224, 122, 95);
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	margin: 30px;
 }
 
 input[type="submit"]:hover {
-    background-color: rgb(168, 130, 221);
+	background-color: rgb(168, 130, 221);
 }
 
 #avatars-container {
-    display: flex;
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	margin-top: 10px;
+	margin-left: 15%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#avatars-container img:hover {
+	transform: rotate(10deg);
 }
 
 input[type="radio"] {
-    margin: 5px;
-    opacity: 1;
+	margin: 5px;
+	opacity: 1;
+	display: none;
 }
 
 input[type="radio"]:hover {
-    margin: 5px;
-    opacity: 1;
-    width: 30px;
+	margin: 5px;
+	opacity: 1;
+	width: 30px;
 }
 
 input[type="radio"]:checked + label img {
-    opacity: 1;
+	opacity: 1;
 }
 
 input[type="radio"]:not(:checked) + label img {
-    opacity: 0.5;
+	opacity: 0.5;
 }
-
-/* html {
-    background-image: url("background.png");
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    font-family: 'Oswald', sans-serif;
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    height: 100%;
-}
-
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(244, 241, 222, 0.4);
-    z-index: -1;
-}
-
-header {
-    background-color: rgba(61, 64, 91, 1);
-    width: 100%;
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-form {
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-form label {
-    margin-bottom: 10px;
-}
-
-form label, form input[type="radio"] {
-    display: inline;
-    margin-right: 10px;
-}
-
-header img {
-    width: 60px;
-    height: 60px;
-    margin-right: 10px;
-}
-
-header h1 {
-    margin: 0;
-    display: inline;
-    color: rgba(224, 122, 95, 1);
-}
-
-.register-button {
-    background-color: rgba(168, 130, 221, 1);
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.register-button:hover {
-    background-color: rgba(244, 241, 222, 1);
-    color: rgb(61, 64, 91, 1);
-} */
-
-
-
