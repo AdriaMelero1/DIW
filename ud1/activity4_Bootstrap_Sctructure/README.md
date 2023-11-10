@@ -1,1 +1,0 @@
-# DIW_act4_bootstrap_structure

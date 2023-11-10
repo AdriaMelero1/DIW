@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form UD4 A1</title>
+    <link rel="stylesheet" href="../styles/style_register.css">
+</head>
+
+<body>
+    <header>
+        <h1><a href="../index.html">ScienceArticles</a></h1>
+    </header>
+    <div id="content">
+        <form>
+            <h2>Registration Form</h2>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" id="birthdate" name="birthdate" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <label for="repeatPassword">Repeat Password:</label>
+            <input type="password" id="repeatPassword" name="repeatPassword" required><br><br>
+
+            <label>Choose Your Avatar:</label><br>
+            <div id="avatars-container">
+                <input type="radio" id="avatar1" name="avatar" value="avatar1">
+                <label for="avatar1"><img src="../img/avatar1.png"></label>
+
+                <input type="radio" id="avatar2" name="avatar" value="avatar2">
+                <label for="avatar2"><img src="../img/avatar2.png"></label>
+
+                <input type="radio" id="avatar3" name="avatar" value="avatar3">
+                <label for="avatar3"><img src="../img/avatar3.png"></label><br><br>
+            </div>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</body>
+
+</html>

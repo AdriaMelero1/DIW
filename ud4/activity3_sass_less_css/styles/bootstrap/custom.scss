@@ -1,0 +1,14 @@
+$primary: #3d405b;
+$secondary: #e07a5f;
+$background: #f4f1de;
+$purple: #a882dd;
+
+$theme-colors: (
+	"primary": $primary,
+	"secondary": $secondary,
+	"background": $background,
+	"purple": $purple,
+);
+
+/* @import "../../node_modules/bootstrap/scss/bootstrap"; */
+@import "../../node_modules/bootstrap/scss/bootstrap";

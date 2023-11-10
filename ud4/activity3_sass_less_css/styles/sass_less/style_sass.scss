@@ -1,0 +1,82 @@
+$yellow: #f4f1de;
+$coral: #e07a5f;
+$darkblue: #3d405b;
+$purple: #a882dd;
+$header-height: 20%;
+$no-margin: 0px;
+$margin-default: 20px;
+$title-size: 50px;
+
+body {
+    background-color: $yellow;
+	font-family: oswald;
+	margin: $no-margin;
+	padding: $no-margin;
+	header {
+		background-color: $darkblue;
+		height: $header-height;
+		display: flex;
+		justify-content: space-between;
+		h1 {
+			color: $yellow;
+			font-size: $title-size + 10px;
+		}
+		.register {
+			background-color: $yellow;
+			height: 10%;
+			padding: 5px;
+			border-radius: 5px;
+			margin: $margin-default;
+		}
+		.register a {
+			text-decoration: none;
+		}
+	}
+	.article {
+		margin: $margin-default;
+		justify-content: center;
+		img {
+			float: left;
+			width: 60%;
+			margin: $margin-default;
+		}
+		#avatar {
+			width: 50px;
+		}
+
+		h1 {
+			margin: $margin-default;
+			width: 100%;
+			font-size: 5em;
+		}
+		.tags {
+			width: 100%;
+			font-size: 30px;
+		}
+	}
+    .content-l{
+		margin: 50px;
+		float: left;
+		img{
+			width: 30%;
+			float: left;
+			margin: $margin-default;
+		}
+		p{
+			margin: 30px;
+		}
+	}
+	.content-r{
+		margin: $margin-default;
+		float: left;
+		img{
+			width: 30%;
+			margin: 30px;
+		}
+		p{
+			margin: 30px;
+			float: left;
+			width: 55%;
+		}
+	}
+}
