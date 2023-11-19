@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#top_header{
+    width: 100%;
+    height: 100px;
+    display: block;
+    text-align: center;
+}
+.logo{
+    height: 100px;
+}
+
+#bottom_header{
+    height: 60px;
+    text-align: center;
+}
+
+#bottom_header li{
+    display: inline;
+    margin: 10px 20px;
+}
+
+#bottom_header li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#bottom_header div {
+    display: none;
+}
+
+
+
+main{
+    position: relative;
+}
+
+aside {
+    width: 100%;
+    position: static;
+}
+
+ul{
+    list-style: none;
+    display: block;
+    margin: 10px;
+    padding: 15px;
+}
+
+aside li{
+    margin: 10px;
+    display: inline;
+}
+
+
+aside li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+
+
+#products-filter {
+    width: 100%;
+    height: 40px;
+    padding-top: 20px;
+    background-color: rgb(178, 178, 178);
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+
+#product-listing {
+    padding: 0;
+    margin: 0;
+}
+
+
+article {
+    width: 400px;
+    text-align: start;
+    margin: 0.5px;
+    display: inline-block;
+    margin-bottom: 5px;
+    
+}
+
+article img{
+    width: 400px;
+}
+
+article span {
+    display: block;
+}
+
+.product-name{
+    justify-content: start;
+    font-weight: 800;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    background-color: rgb(191, 191, 191);
+}
+
+.footer ul {
+    padding: 0;
+    margin: 0;
+}
+
+#back-to-top {
+    position: fixed;
+    right: 5;
+    bottom: 5;
+}
+
+#load-more-products{
+    text-align: center;
+}
+
+
+
+/* Cambia cuando se hace grande */
+@media (min-width: 1000px) {
+    aside{
+        width: 195px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        position: absolute;   
+    }
+    section{
+        margin-left: 195px;
+        position: static;
+    }
+
+    #bottom_header div{
+        right: 0;
+        position: absolute;
+        margin: 5px;
+    }
+
+    #bottom_header{
+        height: 30px;
+    }
+
+    #bottom_header div {
+        display: block;
+        position: relative;
+        text-align: end;
+        bottom: 45px;
+    }
+}
