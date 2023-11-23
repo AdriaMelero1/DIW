@@ -1,15 +1,7 @@
-/* 
-    224, 122, 95    Rojo
-    244, 241, 222   Beig
-    61, 64, 91      Azul Oscuro
-    168, 130, 221   Lila
-
-*/
-
-@font-face {
+/* @font-face {
 	font-family: "Oswald";
 	src: url("oswald.woff2") format("woff2");
-}
+} */
 
 html {
 	background-image: url("background.png");

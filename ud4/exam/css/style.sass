@@ -1,0 +1,121 @@
+$color1: #05a081
+$color2: #413e42
+$color3: #ccc
+
+//Import the font from file
+@FontFamily '../fonts/VarelaRound-Regular.ttf'
+    font-name: 'Varela'
+
+//remove margins for the whole document
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+body
+    font-family: 'Varela Round', sans-serif
+
+
+//Styles for the header (first the header attributes and then the img and list)
+header 
+    height: 150px
+    background-color: $color1
+    text-align: center
+    box-shadow: 2px 2px 10px -5px black
+    img
+        height: 100px
+        animation-name: logo-appear
+        animation-duration: 2s
+    
+    li
+        display: inline-block
+        margin: 5px 10px
+        a
+            text-decoration: none
+            color: $color2
+        a:hover
+            color: black
+
+
+//Styles for the main section, first the products and then the aside(not displayed by default, displayed when width > 576px)
+main
+    section
+        .products
+            text-align: center
+            figure            
+                display: inline-block
+                margin: 10px
+                padding: 10px
+                border: 0.5px solid black
+                border-radius: 5px
+                max-width: 500px
+            img
+                width: 100%
+                animation-name: logo-appear
+                animation-duration: 2s
+    aside
+        display: none
+        background-color: $color3
+        text-align: center
+        height: 150px
+        box-shadow: 2px -2px 10px -5px black
+        ul
+            margin: 30px
+            position: relative
+            top: 20px
+        li
+            display: block
+            margin: 5px 10px
+            a
+                text-decoration: none
+                color: $color2
+            a:hover
+                color: black
+
+
+//Styles for the footer
+footer
+    height: 100px
+    background-color: $color1
+    text-align: center
+    a
+        position: relative
+        top: 20px
+        text-decoration: none
+        color: black
+
+
+//New distribution when screen in medium size. Aside appears at bottom and product size becomes smaller
+@media screen and (min-width: 576px) and (max-width: 992px)
+    main
+        section
+            .products
+                figure
+                    max-width: 250px
+        aside
+            display: block
+
+
+//New distribution when screen in large size. Aside appears at side and product size becomes bigger
+@media screen and (min-width: 992px)
+    main
+        position: relative
+        top: 0
+        section
+            .products
+                position: absolute
+                margin-left: 200px
+                figure
+                    max-width: 350px
+        aside
+            display: block
+            height: 350vh
+            position: relative
+            width: 200px
+            left: 0
+            top: 0
+    footer
+        position: relative
+        bottom: 0
+        left: 0
+            

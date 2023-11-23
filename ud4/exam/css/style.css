@@ -1,0 +1,124 @@
+@FontFamily "../fonts/VarelaRound-Regular.ttf" {
+  font-name: "Varela";
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Varela Round", sans-serif;
+}
+
+header {
+  height: 150px;
+  background-color: #05a081;
+  text-align: center;
+  box-shadow: 2px 2px 10px -5px black;
+}
+header img {
+  height: 100px;
+  animation-name: logo-appear;
+  animation-duration: 2s;
+}
+header li {
+  display: inline-block;
+  margin: 5px 10px;
+}
+header li a {
+  text-decoration: none;
+  color: #413e42;
+}
+header li a:hover {
+  color: black;
+}
+
+main section .products {
+  text-align: center;
+}
+main section .products figure {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  border: 0.5px solid black;
+  border-radius: 5px;
+  max-width: 500px;
+}
+main section .products img {
+  width: 100%;
+  animation-name: logo-appear;
+  animation-duration: 2s;
+}
+main aside {
+  display: none;
+  background-color: #ccc;
+  text-align: center;
+  height: 150px;
+  box-shadow: 2px -2px 10px -5px black;
+}
+main aside ul {
+  margin: 30px;
+  position: relative;
+  top: 20px;
+}
+main aside li {
+  display: block;
+  margin: 5px 10px;
+}
+main aside li a {
+  text-decoration: none;
+  color: #413e42;
+}
+main aside li a:hover {
+  color: black;
+}
+
+footer {
+  height: 100px;
+  background-color: #05a081;
+  text-align: center;
+}
+footer a {
+  position: relative;
+  top: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+@media screen and (min-width: 576px) and (max-width: 992px) {
+  main section .products figure {
+    max-width: 250px;
+  }
+  main aside {
+    display: block;
+  }
+}
+@media screen and (min-width: 992px) {
+  main {
+    position: relative;
+    top: 0;
+  }
+  main section .products {
+    position: absolute;
+    margin-left: 200px;
+  }
+  main section .products figure {
+    max-width: 350px;
+  }
+  main aside {
+    display: block;
+    height: 350vh;
+    position: relative;
+    width: 200px;
+    left: 0;
+    top: 0;
+  }
+  footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

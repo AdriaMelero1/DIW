@@ -94,18 +94,25 @@ section{
     bottom: 45px;
 }
 
+li {
+    display: flex;
+}
+
+section{
+    max-width: 80%;
+}
+
 
 article {
-    width: 400px;
+    width: 200px;
     text-align: start;
     margin: 0.5px;
-    display: flex;
     margin-bottom: 5px;
     
 }
 
 article img{
-    width: 400px;
+    width: 200px;
 }
 
 article span {
