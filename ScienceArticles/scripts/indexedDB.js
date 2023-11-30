@@ -51,7 +51,7 @@ function openCreateDb(onDbCompleted) {
 		db = req.result; //Or this.result
 
 		console.log("openCreateDb: upgrade needed " + db);
-		var store = db.createObjectStore(DB_STORE_NAME, { keyPath: "id", autoIncrement: true });
+		var store = db.createObjectStore(DB_STORE_USERS, { keyPath: "id", autoIncrement: true });
 		console.log("openCreateDb: Object store created");
 
 		store.createIndex('username', 'username', { unique: true });
@@ -88,8 +88,8 @@ function addUser(db) {
 	console.log(obj);
 
 	// Start a new transaction in readwrite mode. We can use readonly also
-	var tx = db.transaction(DB_STORE_NAME, "readwrite");
-	var store = tx.objectStore(DB_STORE_NAME);
+	var tx = db.transaction(DB_STORE_USERS, "readwrite");
+	var store = tx.objectStore(DB_STORE_USERS);
 
 	try {
 		// Inserts data in our ObjectStore
@@ -126,27 +126,37 @@ window.addEventListener('load', (event) => {
 
 
 
-		for (i = 0; i < avatars.length; i++) {
+
+
+
+
+
+ 		for (i = 0; i < avatars.length; i++) {
 			if (avatars[i].checked) {
 				avatarurl = avatars[i].getAttribute('src');
 				console.log("AVATAR URL: " + avatarurl);
 			}
 		}
 
-		checkLength(username,3,6);
-		checkLength(password, 2,5);
-		
+		checkLength(password, 8, 20);
+
+		checkPasswordIsValid(password);
+
 		isEmailValid(email);
-		
+
 		checkPasswordsAreEqual(password, password2);
-		
+
 		isMandatory([username, email, password])
 
-		let isAllValid = checkLength(username, 3, 6) && isEmailValid(email) && checkLength(password, 2, 5) && checkPasswordsAreEqual(password, password2) 
-		&& isMandatory([username,email, password, password2]) && avatarurl !== undefined && avatarurl !== '';
-		console.log(isAllValid);
 
-		/* 		openCreateDb(addUser) */
+		let isAllValid = isEmailValid(email) && checkLength(password, 8, 20) && checkPasswordsAreEqual(password, password2)
+			&& isMandatory([username, email, password, password2]) && avatarurl !== undefined && avatarurl !== '' && checkPasswordIsValid(password);
+
+			if(isAllValid){
+				openCreateDb(addUser)
+			}
+
+
 	});
 });
 
@@ -186,32 +196,47 @@ function checkPasswordsAreEqual(input1, input2) {
 	}
 }
 
+function checkPasswordIsValid(input) {
 
-function isEmailValid(input){
+	//Aquest regex no agafa caracters com . - _
+	const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+	if(re.test(input.value.trim())) {
+		displayCorrect(input);
+		return true;
+	} else {
+		let message = takeInputName(input) + " format not valid. Must contain upper and lower case letters, a number and a special character.";
+		displayError(input, message);
+		return false;
+	}
+}
+
+
+function isEmailValid(input) {
 	const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-	if(re.test(input.value.trim())){
-			displayCorrect(input);
-			return true;
+	if (re.test(input.value.trim())) {
+		displayCorrect(input);
+		return true;
 	} else {
-			let message = takeInputName(input) + " format not valid";
-			displayError(input, message);
-			return false;
+		let message = takeInputName(input) + " format not valid";
+		displayError(input, message);
+		return false;
 	}
 }
 
 
 
 function checkLength(input, min, max) {
-	if(input.value.length < min){
-			displayError(input, `${takeInputName(input)} must have at least ${min} characters`);
-			return false;    
-	} else if(input.value.length > max){
-			displayError(input, `${takeInputName(input)} must have less than ${max} characters`);    
-			return false;
+	if (input.value.length < min) {
+		displayError(input, `${takeInputName(input)} must have at least ${min} characters`);
+		return false;
+	} else if (input.value.length > max) {
+		displayError(input, `${takeInputName(input)} must have less than ${max} characters`);
+		return false;
 	} else {
-			displayCorrect(input);
-			return true;
+		displayCorrect(input);
+		return true;
 	}
 }
 
