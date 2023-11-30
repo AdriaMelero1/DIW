@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form UD4 A1</title>
+    <link rel="stylesheet" href="../styles/register.css">
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html">ScienceArticles</a></h1>
+    </header>
+    <div id="content">
+        <div class="form">
+            <h2>Registration Form</h2>
+
+            <div class="form-control">
+                <label for="username">User Name:</label>
+                <input type="text" id="username" name="username"><br><br>
+                <small>Error Message</small>
+            </div>
+
+            <div class="form-control">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email"><br><br>
+                <small>Error Message</small>
+            </div>
+
+            <div class="form-control">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"><br><br>
+                <small>Error Message</small>
+            </div>
+
+            <div class="form-control">
+                <label for="password2">Repeat Password:</label>
+                <input type="password" id="password2" name="password2"><br><br>
+                <small>Error Message</small>
+            </div>
+
+            <div class="form-control">
+                <label>Choose Your Avatar:</label><br>
+                <div id="avatars-container">
+                    <input type="radio" id="avatar1" name="avatar" value="avatar1" src="../img/avatar1.png">
+                    <label for="avatar1"><img src="../img/avatar1.png"></label>
+
+                    <input type="radio" id="avatar2" name="avatar" value="avatar2" src="../img/avatar2.png">
+                    <label for="avatar2"><img src="../img/avatar2.png"></label>
+
+                    <input type="radio" id="avatar3" name="avatar" value="avatar3" src="../img/avatar3.png">
+                    <label for="avatar3"><img src="../img/avatar3.png"></label><br><br>
+                </div>
+                <small>Error Message</small>
+            </div>
+            <div class="form-control">
+                <label for="admin">Administrator</label>
+                <input type="checkbox" name="admin" id="admin">
+            </div>
+                <input type="submit" value="Save" id="saveBtn">
+        </div>
+    </div>
+    </div>
+
+    <script src="../scripts/indexedDB.js"></script>
+</body>
+
+</html>

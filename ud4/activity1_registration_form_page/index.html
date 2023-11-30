@@ -15,41 +15,61 @@
         <button class="register-button">Register</button>
     </header>
     <div id="content">
-        <form>
+        <form id="form">
             <h2>Registration Form</h2>
 
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" ><br><br>
+            <div class="form-control">
+                <label for="name">Name:</label>
+                <input type="text" id="username" name="username"><br><br>
+                <small>Error message</small>
+            </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" ><br><br>
+            <div class="form-control">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
+                <small>Error message</small>
+            </div>
 
-            <label for="birthdate">Birthdate:</label>
-            <input type="date" id="birthdate" name="birthdate" ><br><br>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" ><br><br>
+            <div class="form-control">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"><br><br>
+                <small>Error message</small>
+            </div>
 
-            <label for="repeatPassword">Repeat Password:</label>
-            <input type="password" id="repeatPassword" name="repeatPassword" ><br><br>
+            <div class="form-control">
+                <label for="password2">Repeat Password:</label>
+                <input type="password" id="repeatPassword" name="password2"><br><br>
+                <small>Error message</small>
+            </div>
 
+            <div class="form-control">
             <label>Choose Your Avatar:</label><br>
             <div id="avatars-container">
-                <input type="radio" id="avatar1" name="avatar" value="avatar1">
-                <label for="avatar1"><img src="avatar1.png"></label>
+                <input type="radio" id="avatar1" class="avatar" value="avatar1">
+                <label for="avatar1"><img src="avatars/avatar1.png"></label>
 
-                <input type="radio" id="avatar2" name="avatar" value="avatar2">
-                <label for="avatar2"><img src="avatar2.png"></label>
+                <input type="radio" id="avatar2" class="avatar" value="avatar2">
+                <label for="avatar2"><img src="avatars/avatar2.png"></label>
 
-                <input type="radio" id="avatar3" name="avatar" value="avatar3">
-                <label for="avatar3"><img src="avatar3.png"></label><br><br>
+                <input type="radio" id="avatar3" class="avatar" value="avatar3">
+                <label for="avatar3"><img src="avatars/avatar3.png"></label><br><br>
             </div>
-            <input type="submit" value="Save">
+            <small>Error message</small>
+            <div class="form-control">
 
-        </form>
+            <div class="admin">
+                <label for="admin">Administrator</label>
+                <input type="checkbox" name="admin">
+            </div>
+
+            <button type="submit" id="save-button">Save</button>
+    </div>
+    </form>
 
     </div>
-    <script src="../../ud5/activity1_conect_to_indexedDB/script.js"></script>
+    <script src="../../ud5/activity1_conect_to_indexedDB/indexedDB.js"></script>
+    <script src="../../ud5/activity1_conect_to_indexedDB/formValidation.js"></script>
 </body>
 
 </html>

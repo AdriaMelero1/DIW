@@ -1,10 +1,14 @@
-/* @font-face {
-	font-family: "Oswald";
-	src: url("oswald.woff2") format("woff2");
-} */
+/* 
+    224, 122, 95    Rojo
+    244, 241, 222   Beig
+    61, 64, 91      Azul Oscuro
+    168, 130, 221   Lila
+
+*/
+
 
 html {
-	background-image: url("background.png");
+	background-image: url("../img/background.png");
 	background-size: cover;
 	background-position: center;
 	margin: 0;
@@ -34,20 +38,17 @@ header {
 	);
 	color: white;
 	text-align: center;
-	padding: 5px;
+	padding: 20px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
-	height: 120px;
-}
-
-img{
 	height: 100px;
 }
 
 h1 {
 	font-size: 60px;
 	text-shadow: 2px 3px 4px rgb(224, 122, 95);
+
 }
 
 .register-button {
@@ -67,13 +68,13 @@ h1 {
 
 #content {
 	background-color: rgba(244, 241, 222, 0.4);
-	padding: 0 40px;
+	padding: 40px;
 	margin: 20px;
 	border-radius: 5px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-form {
+.form {
 	margin: 0 auto;
 	max-width: 600px;
 	text-align: center;
@@ -82,11 +83,10 @@ form {
 h2 {
 	color: rgb(61, 64, 91);
 	animation-duration: 1s;
+/* 	animation-name: size; */
 	font-size: 40px;
 	animation-iteration-count: infinite;
-	top: 20%;
-	margin-top: 0;
-}
+	top: 20%}
 
 @keyframes size {
 	0% {
@@ -102,6 +102,7 @@ h2 {
 
 label {
 	display: block;
+	margin-top: 10px;
 }
 
 input[type="text"],
@@ -146,13 +147,6 @@ input[type="submit"]:hover {
 	transform: rotate(10deg);
 }
 
-#avatars-container img {
-	height: 50px;
-}
-
-
-
-
 input[type="radio"] {
 	margin: 5px;
 	opacity: 1;
@@ -173,35 +167,21 @@ input[type="radio"]:not(:checked) + label img {
 	opacity: 0.5;
 }
 
-.admin{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-input[type="checkbox"]{
-	margin: 15px;
-	background-color: bisque;
-}
-
-#save-button{
-	background-color: bisque;
-	border: 0;
-	padding: 10px 25px;
-	margin: 10px;
-	font-size: 20px;
-	font-family: "Oswald", sans-serif;
-	border: 1px solid black;
-	border-radius: 5px;
-}
 
 
-/* FOR FORM VALIDATION MESSAGES */
+/* FORM CONTROL */
+
 :root{
 	--error: #c1121f;
 	--light-error: #f2a9ae;
 	--correct: #588157;
 	--correct-light: #a1cba0;
+}
+
+.form-control input:focus{
+	outline: 0px;
+	background-color: #fdf0d5;
+	border-color: black;
 }
 
 .form-control.correct input{
@@ -217,7 +197,8 @@ input[type="checkbox"]{
 .form-control small{
 	color: var(--error);
 	position: relative;
-
+	bottom: 0;
+	left: 0;
 	visibility: hidden;
 }
 
