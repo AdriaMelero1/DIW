@@ -200,3 +200,21 @@ input[type="radio"]:not(:checked) + label img {
 .form-control.error small{
 	visibility: visible;
 }
+
+button{
+	background-color: rgb(168, 130, 221);
+	position: absolute;
+	right: 20px;
+	border: 0;
+	padding: 10px;
+	border-radius: 10px;
+	font-family: "Oswald", sans-serif;
+
+}
+
+
+@media screen and (max-width: 768px) {
+	h1{
+		font-size: 8vw;
+	}
+}

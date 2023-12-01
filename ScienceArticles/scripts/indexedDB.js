@@ -14,7 +14,7 @@ const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
 const avatars = document.getElementsByName('avatar');
 const admin = document.getElementById('admin');
-
+let req;
 
 let avatarurl;
 /**
@@ -28,7 +28,7 @@ function openCreateDb(onDbCompleted) {
 		opened = false;
 	}
 	//We could open changing version ..open(database, 3)
-	var req = indexedDB.open(database, DB_VERSION);
+	req = indexedDB.open(database, DB_VERSION);
 
 	//This is how we pass the DB instance to our var
 	req.onsuccess = function (e) {
@@ -64,6 +64,10 @@ function openCreateDb(onDbCompleted) {
 		console.log("openCreateDb: Index created on avatarurl");
 		store.createIndex('admin', 'admin', { unique: false });
 		console.log("openCreateDb: Index created on admin");
+
+		store = db.createObjectStore(DB_STORE_USER_LOGGED_IN, { keyPath: "id", autoIncrement: true });
+		store.createIndex('userLogedIn', 'userLogedIn', { unique: true });
+		console.log("openCreateDb: Index created on userLogedIn");
 	};
 
 	req.onerror = function (e) {
@@ -78,45 +82,75 @@ function addUser(db) {
 
 	console.log(admin);
 
+	//Falte encriptar contraseña aqui
+
 	var obj = { username: username.value, email: email.value, password: password.value, avatarurl: avatarurl, admin: admin.checked };
 
-	//PORQUE admin: admin no funciona y admin:admin.value si????
-	/* 	indexedDB.js:102 Uncaught ReferenceError: req is not defined
-		at addUser (indexedDB.js:102:2)
-		at req.onsuccess (indexedDB.js:38:3) */
 
 	console.log(obj);
 
 	// Start a new transaction in readwrite mode. We can use readonly also
+	//Insert user
 	var tx = db.transaction(DB_STORE_USERS, "readwrite");
 	var store = tx.objectStore(DB_STORE_USERS);
 
+	var usernameIndex = store.index('username');
+	var usernameReq = usernameIndex.get(username.value);
+
+	usernameReq.onsuccess = function (e) {
+		try {
+			req = store.add(obj);
+		} catch (e) {
+			console.log("Catch");
+
+		}
+		req.onsuccess = function (e) {
+			console.log("addUser: Data insertion successfully done. Id: " + e.target.result);
+			addLoggedInUser(db);
+		};
+		req.onerror = function (e) {
+			console.error("addUser: error creating data", this.error);
+		};
+
+		tx.oncomplete = function () {
+			console.log("addUser: transaction completed");
+			db.close();
+			opened = false;
+		};
+	}
+}
+
+function addLoggedInUser(db) {
+
+	var txLoggedIn = db.transaction(DB_STORE_USER_LOGGED_IN, "readwrite");
+	var storeLoggedIn = txLoggedIn.objectStore(DB_STORE_USER_LOGGED_IN);
+
+	let obj = { userLoggedIn: username.value };
+	console.log("USERLI: " + obj.userLoggedIn);
 	try {
-		// Inserts data in our ObjectStore
-		req = store.add(obj);
+
+		req = storeLoggedIn.add(obj);
+		req.onsuccess = function (e) {
+			console.log("UserLoggedIn: Data insertion successfully done. Id: " + e.target.result);
+			location.href = '../pages/index.html';
+
+		};
+
+		req.onerror = function (e) {
+			console.error("addUser: error creating data", this.error);
+		};
+
 	} catch (e) {
 		console.log("Catch");
 	}
 
-	req.onsuccess = function (e) {
-		console.log("addUser: Data insertion successfully done. Id: " + e.target.result);
-
-		// Operations we want to do after inserting data
-		/* readData();
-		clearFormInputs(); */
-
-	};
-	req.onerror = function (e) {
-		console.error("addUser: error creating data", this.error);
-	};
-
-	//After transaction is completed we close de database
-	tx.oncomplete = function () {
-		console.log("addUser: transaction completed");
+	txLoggedIn.oncomplete = function () {
+		console.log("User logged in: transaction completed");
 		db.close();
 		opened = false;
 	};
 }
+
 
 
 
@@ -127,11 +161,12 @@ window.addEventListener('load', (event) => {
 
 
 
+		openCreateDb(addUser)
 
 
 
 
- 		for (i = 0; i < avatars.length; i++) {
+		for (i = 0; i < avatars.length; i++) {
 			if (avatars[i].checked) {
 				avatarurl = avatars[i].getAttribute('src');
 				console.log("AVATAR URL: " + avatarurl);
@@ -152,9 +187,9 @@ window.addEventListener('load', (event) => {
 		let isAllValid = isEmailValid(email) && checkLength(password, 8, 20) && checkPasswordsAreEqual(password, password2)
 			&& isMandatory([username, email, password, password2]) && avatarurl !== undefined && avatarurl !== '' && checkPasswordIsValid(password);
 
-			if(isAllValid){
-				openCreateDb(addUser)
-			}
+		if (isAllValid) {
+			openCreateDb(addUser)
+		}
 
 
 	});
@@ -201,7 +236,7 @@ function checkPasswordIsValid(input) {
 	//Aquest regex no agafa caracters com . - _
 	const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-	if(re.test(input.value.trim())) {
+	if (re.test(input.value.trim())) {
 		displayCorrect(input);
 		return true;
 	} else {
