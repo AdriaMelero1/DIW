@@ -274,7 +274,7 @@ function logout() {
 
 			console.log("Logout correct transaction");
 
-			location.reload();
+			location.href = "../pages/index.html";
 		};
 
 		req.onerror = function (e) {
