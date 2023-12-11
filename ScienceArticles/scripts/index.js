@@ -1,7 +1,40 @@
-const loginoutbtn = document.getElementById('loginoutbtn');
-const avatar = document.getElementById('avatar');
+//Cuando se carga la pagina ejecuta esta funcion
+window.onload = function(){
+	//Primero abre la base de datos y cuando acaba ejecuta la funcion (openCreateDB oncompleted)
+	openCreateDb(function (db) {
+		//Leo los usuarios y cuando acaba, ejecuta esta funcion con el resultado de los usuarios como parametro
+		readUsers(db, function (users) {
+			//Busco si hay algun usuario loggeado
+			readUserLoggedIn(db, function (loggedUser) {
+				const currentUser = users.find(user => user.username === loggedUser[0]?.userLoggedIn)
+
+				if (currentUser) {
+					const container = document.getElementById('userdata');
+					const avatar = document.createElement("img");
+					const logoutButton = document.createElement("button")
+					logoutButton.onclick = logout;
+					logoutButton.innerText = "Log out";
+					avatar.src = currentUser.avatarurl;
+
+					container.innerHTML = "";
+
+					container.append(avatar)
+					container.append(logoutButton)
+					if (currentUser.admin) {
+						location.href = "../pages/adminPage.html"
+					} else {
+						console.log("Not admin");
+					}
+				}
+			});
+		});
+
+		console.log("DB opened");
+	});
+}
 
 
 
 
-avatar.src = "../img/avatar2.png"
+
+
