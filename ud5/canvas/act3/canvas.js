@@ -53,6 +53,12 @@ function getDirectionX() {
 
 startBtn.addEventListener('click', () => {
 
+	start()
+
+});
+
+
+function start(){
 	if (!started) {
 		started = true;
 
@@ -71,17 +77,42 @@ startBtn.addEventListener('click', () => {
 			ballX += directionX * movex.value / 3;
 			ballY += directionY * movey.value / 3;
 			clearCanvas();
+			draw((ballX - directionX * movex.value * 2), (ballY - directionY * movey.value * 2), "#da2c38")
 			draw((ballX - directionX * movex.value * 1.5), (ballY - directionY * movey.value * 1.5), "#87c38f")
-			draw((ballX - directionX * movex.value * 2), (ballY - directionY * movey.value * 2), "#87c38f")
 			draw(ballX - directionX * movex.value, ballY - directionY * movey.value, "#87c38f")
 			draw(ballX, ballY, "#da2c38");
 
 		}, 5);
 	}
-});
-
+}
 
 stopBtn.addEventListener('click', () => {
 	started = false;
 	clearInterval(move);
+	directionX = movex.value;
+	directionY = movey.value;
+});
+
+
+document.addEventListener("keydown", function(event) {
+	start()
+	if(event.key == "ArrowUp"){
+		directionY = -movey.value;
+		directionX = 0;
+	}
+	if(event.key == "ArrowDown"){
+		directionY = movey.value;
+		directionX = 0;
+
+	}
+	if(event.key == "ArrowLeft"){
+		directionX = -movex.value;
+		directionY = 0;
+
+	}
+	if(event.key == "ArrowRight"){
+		directionX = movex.value;
+		directionY = 0;
+
+	}
 });
