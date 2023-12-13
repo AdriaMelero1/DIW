@@ -1,0 +1,49 @@
+/* COLORS
+da2c38 Red
+226f54 Green
+87c38f Light green
+f4f0bb Beige
+43291f Brown
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Afacad:wght@500&display=swap');
+*{
+	margin: 0 auto;
+	padding: 0;
+	background-color: #87c38f;
+	font-family: Afacad;
+	font-size: 20px;
+	font-weight: 800;
+}
+
+main{
+	width: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+canvas{
+	border: 3px solid #f4f0bb;
+	background-color: #226f54;
+	border-radius: 25px;
+	margin: 20px;
+	box-shadow: 11px 11px 10px -6px #226f54;
+}
+
+
+input, button{
+	width: 80px;
+	text-align: center;
+	background-color: #da2c38;
+	border: 3px solid #f4f0bb;
+	margin: 5px;
+	border-radius: 15px;
+	padding: 10px;
+}
+
+button:hover, input:hover{
+	background-color: #f4f0bb;
+	color: #226f54;
+	border: 3px solid #226f54;
+}

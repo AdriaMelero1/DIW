@@ -5,7 +5,6 @@ window.addEventListener('load', (event) => {
 		for (i = 0; i < avatars.length; i++) {
 			if (avatars[i].checked) {
 				avatarurl = avatars[i].getAttribute('src');
-				console.log("AVATAR URL: " + avatarurl);
 			}
 		}
 		
