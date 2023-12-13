@@ -1,0 +1,12 @@
+*{
+	margin: 0 auto;
+	padding: 0;
+}
+
+main{
+	width: fit-content;
+}
+
+canvas{
+	border: 5px dashed lightblue;
+}
