@@ -1,51 +1,50 @@
-//Create a number of cards between 6 and 20 and an empty array
 const numOfCards = Math.floor((Math.random() * 8) + 3) * 2;
 const cards = [];
 
-let showing = false;
+let showedCards = 0;
+let n = [];
 
-//
 $(document).ready(function () {
+    for (let i = 1; i < (numOfCards / 2) + 1; i++) {
+        cards.push(i, i);
+    }
 
-	//Fill the array with numbers, every number in 2 cards
-	for (let i = 1; i < (numOfCards/2) +1; i++) {
-		cards.push(i, i);
-	}
+    cards.sort(() => Math.random() - 0.5);
 
-	//Sort randomly the cards
-	cards.sort(() => Math.random() - 0.5 );
+    $("body").prepend("<div class='container'></div>");
+    $("body").prepend("<div class='message'></div>");
 
-	//Create a container
-	$("body").prepend("<div class='container'></div>");
+    for (let i = 0; i < cards.length; i++) {
+        $(".container").prepend(`<div class='card'><div class='num'>${cards[i]}</div></div>`);
+    }
 
+    $(".card").on("click", function () {
+        console.log("object");
 
-	//For every card create a div with the number inside
-	for(let i = 0; i < cards.length; i++) {
-		$(".container").prepend(`<div class='card'><div class='num'>${cards[i]}</div></div>`);
-	}
+        if (showedCards < 2 && !$(this).children().hasClass("show")) {
+            $(this).children().css("opacity", "1");
+            showedCards++;
 
+            n.push($(this).children().text());
 
-	//Event listener for the cards
-	// $(".card").on("click", function () {
+            if (showedCards == 2) {
+                if (n[0] == n[1]) {
+									$(".message").text("You found a pair!");
+									$(".card:contains('" + n[0] + "')").children().addClass("show");
+                } else {
+									$(".message").text("Not a pair");
 
-	// 	if(!showing){
-	// 		showing = true;
-	// 		$(this).children().css("opacity", "1");
-	// 	setTimeout(() => {
-	// 		$(this).children().css("opacity", "0");
-	// 		showing = false;
-	// 	}, 1000);
-	// 	}
+                    
+                    setTimeout(() => {
+                        $(".card:not(.show)").children().css("opacity", "1");
+                        $(".card").children().css("opacity", "0");
+												$(".message").text("");
 
-
-		
-	// });
-
-		$(".card").on("click", showCardShort());
-
+                    }, 1000);
+                }
+                n = [];
+                showedCards = 0;
+            }
+        }
+    });
 });
-
-
-function showCardShort() {
-
-}
