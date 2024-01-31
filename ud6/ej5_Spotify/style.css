@@ -1,0 +1,100 @@
+/* 
+	#1DB954 Green
+	#212121	Dark grey
+	#121212	Black
+	#535353	Light grey
+	#b3b3b3 White
+*/
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #121212;
+	color: #b3b3b3;
+	font-family: 'Gotham Rounded Book', sans-serif;
+}
+
+header {
+	display: flex;
+}
+
+
+#logo {
+	margin: 20px;
+	height: 100px;
+}
+
+h1 {
+	color: #1db954;
+	font-size: 65px;
+	position: absolute;
+	top: 33px;
+	left: 350px;
+}
+
+form {
+	display: flex;
+	position: absolute;
+	top: 140px;
+	margin: 20px;
+}
+
+input[type=text] {
+	width: 475px;
+	height: 50px;
+	position: relative;
+	border-radius: 30px;
+	border: none;
+	padding-left: 30px;
+	font-size: 30px;
+	color: #212121;
+}
+
+input[type=text]:focus {
+	outline: none;
+}
+
+input[type=submit] {
+	width: 100px;
+	height: 50px;
+	position: relative;
+	margin-left: 10px;
+	border-radius: 50px;
+	border: none;
+	background-color: #1db954;
+	font-size: 20px;
+	color: #212121;
+	cursor: pointer;
+}
+
+main {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	position: relative;
+	top: 150px;
+}
+
+.artists {
+	border: 3px solid #1db954;
+	width: 45%;
+	height: 1000px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.songs {
+	border: 3px solid #1db954;
+	width: 45%;
+	height: 1000px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+}
