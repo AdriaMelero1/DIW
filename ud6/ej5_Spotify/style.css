@@ -1,5 +1,5 @@
 /* 
-	#1DB954 Green
+	#20d464 Green
 	#212121	Dark grey
 	#121212	Black
 	#535353	Light grey
@@ -30,7 +30,7 @@ header {
 }
 
 h1 {
-	color: #1db954;
+	color: #20d464;
 	font-size: 65px;
 	position: absolute;
 	top: 33px;
@@ -66,7 +66,7 @@ input[type=submit] {
 	margin-left: 10px;
 	border-radius: 50px;
 	border: none;
-	background-color: #1db954;
+	background-color: #20d464;
 	font-size: 20px;
 	color: #212121;
 	cursor: pointer;
@@ -81,7 +81,7 @@ main {
 }
 
 .artists {
-	border: 3px solid #1db954;
+	border: 3px solid #20d464;
 	width: 45%;
 	height: 1000px;
 	display: flex;
@@ -90,11 +90,58 @@ main {
 }
 
 .songs {
-	border: 3px solid #1db954;
+	border: 3px solid #20d464;
 	width: 45%;
 	height: 1000px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 
+}
+
+@media (max-width: 650px) {	
+	header {
+		flex-direction: column;
+	}
+	
+	#logo {
+		width: 170px;
+		height: auto;
+	}
+	
+	h1 {
+		font-size: 35px;
+		left: 195px;
+		top: 27px;
+	}
+	
+	form {
+		top: 100px;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	input[type=text] {
+		width: 80%;
+		height: 40px;
+		font-size: 15px;
+	}
+	
+	input[type=submit] {
+		width: 80px;
+		height: 40px;
+		font-size: 16px;
+		margin-right: 30px;
+	}
+	
+	main {
+		top: 120px;
+	}
+	
+	.artists,
+	.songs {
+		width: 90%;
+		height: 800px;
+	}
 }
