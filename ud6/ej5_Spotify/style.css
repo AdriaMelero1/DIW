@@ -37,7 +37,7 @@ h1 {
 	left: 350px;
 }
 
-form {
+.form {
 	display: flex;
 	position: absolute;
 	top: 140px;
@@ -59,7 +59,7 @@ input[type=text]:focus {
 	outline: none;
 }
 
-input[type=submit] {
+button {
 	width: 100px;
 	height: 50px;
 	position: relative;
@@ -83,7 +83,7 @@ main {
 .artists {
 	border: 3px solid #20d464;
 	width: 45%;
-	height: 1000px;
+	height: auto;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -98,6 +98,31 @@ main {
 	justify-content: center;
 
 }
+
+
+.artist {
+	width: 90%;
+	margin: 20px;
+	/* border: 3px solid #212121; */
+	padding: 15px;
+	width: 100%;
+	height: auto;
+	box-shadow: 0 0 10px #20d4654b;
+	background-color: #101010;
+}
+
+.artist p {
+	text-align: center;
+	font-size: 25px;
+	color: #b3b3b3;
+	margin: 10px;
+}
+
+.artist img {
+	width: 100%;
+	height: auto;
+}
+
 
 @media (max-width: 650px) {	
 	header {
@@ -128,7 +153,7 @@ main {
 		font-size: 15px;
 	}
 	
-	input[type=submit] {
+	button {
 		width: 80px;
 		height: 40px;
 		font-size: 16px;
