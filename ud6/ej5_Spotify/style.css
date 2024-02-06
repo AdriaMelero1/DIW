@@ -37,6 +37,18 @@ h1 {
 	left: 350px;
 }
 
+h2 {
+	text-align: center;
+	margin-top: 10px;
+}
+
+h3 {
+	font-size: 30px;
+	color: #535353;
+	margin: 20px;
+	text-align: center;
+}
+
 .form {
 	display: flex;
 	position: absolute;
@@ -80,47 +92,115 @@ main {
 	top: 150px;
 }
 
-.artists {
+.container1 {
 	border: 3px solid #20d464;
 	width: 45%;
-	height: auto;
+	height: fit-content;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	min-height: 500px;
 }
 
-.songs {
+.container2 {
 	border: 3px solid #20d464;
 	width: 45%;
-	height: 1000px;
+	height: fit-content;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	min-height: 500px;
 
 }
 
+.logo{
+	cursor: pointer;
+}
 
-.artist {
-	width: 90%;
+.artist, .album, .big-song {
+	max-width: 90%;
 	margin: 20px;
-	/* border: 3px solid #212121; */
 	padding: 15px;
 	width: 100%;
-	height: auto;
+	/* height: 500px; */
+	min-height: auto;
 	box-shadow: 0 0 10px #20d4654b;
 	background-color: #101010;
+	cursor: pointer;
 }
 
-.artist p {
+.small-song {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: auto;
+	width: 90%;
+	margin: 20px 0;
+	box-shadow: 0 0 10px #20d4654b;
+	cursor: pointer;
+}
+.right-content {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.small-song img {
+	width: 30%;
+	margin: 10px 15px;
+}
+
+.small-song p {
+	font-size: 20px;
+	color: #b3b3b3;
+	margin: 10px;
+	display: flex;
+}
+
+.small-song audio, h5 {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	width: 90%;
+	right: 0;
+}
+
+
+audio {
+	margin: 20px 0;
+	width: 100%;
+	height: 40px;
+	color: #535353;
+}
+
+
+.artist p, .album p, .big-song p{
 	text-align: center;
 	font-size: 25px;
 	color: #b3b3b3;
 	margin: 10px;
 }
 
-.artist img {
+.artist img, .album img, .big-song img{
 	width: 100%;
 	height: auto;
+}
+
+
+.song-info{
+	width: 90%;
+}
+
+.song-info h3 {
+	color: #b3b3b3;
+}
+
+.song-info img{
+	width: 100%;
+	height: auto;
+	box-shadow: 0 0 15px #20d465;
+	margin: 30px 0;
 }
 
 
@@ -138,6 +218,19 @@ main {
 		font-size: 35px;
 		left: 195px;
 		top: 27px;
+	}
+
+	h3 {
+		font-size: 20px;
+	}
+
+	p {
+		font-size: 15px !important;
+		margin: 5px !important;
+	}
+
+	.form {
+		top: 70px
 	}
 	
 	form {
@@ -168,5 +261,9 @@ main {
 	.songs {
 		width: 90%;
 		height: 800px;
+	}
+
+	.small-song p, .song-info p {
+		font-size: 15px !important;
 	}
 }
