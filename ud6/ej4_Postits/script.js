@@ -4,7 +4,7 @@ $("body").append("<div class='red-container ctn'><span>0</span></div>");
 $("body").append("<div class='yellow-container ctn'><span>0</span></div>");
 
 //Button for new postit
-$("body").append("<button id='new'>NEW POST IT</button>");
+$("body").prepend("<button id='new'>NEW POST IT</button>");
 
 //CREATION OF POSTITS (random color)
 //Action listener for the button new postit
@@ -88,7 +88,7 @@ $("body").on("click", ".close", function () {
 
 		//Dialog to confirm the delete is created with the next properties
 		$("<div>Are you sure you want to delete this postit?</div>").dialog({
-			resizable: false,
+			resizable: true,
 			height: "auto",
 			width: 400,
 			buttons: {

@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Roboto Mono', sans-serif;
+	background-color: rgb(255, 214, 161);
+	color: rgb(107, 23, 23);
+	margin: 40px;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+ul {
+	font-size: 30px;
+	list-style: none;
+}
+
+li {
+	font-size: 20px;
+}
+
+.posts, .createEdit {
+	background-color: rgb(251, 200, 134);
+	border-radius: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.post {
+	background-color: rgb(255, 214, 161);
+	padding: 15px;
+	margin: 15px;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.post p {
+	text-decoration-thickness: 1px;
+	text-decoration-line: underline;
+	margin: 10px;
+}
+
+button {
+	font-family: 'Roboto Mono', sans-serif;
+	padding: 5px;
+	margin: 5px 10px;
+	border-radius: 5px;
+	border: none;
+	background-color: rgb(107, 23, 23);
+	color: white;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.createEdit {
+	margin: 50px;
+	width: 50%;
+	min-height: 200px !important;
+	flex-direction: column;
+	padding: 20px;
+}
+
+.createEdit form {
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	background-color: rgb(255, 214, 161);
+	border-radius: 10px;
+}
+
+.createEdit input {
+	font-family: 'Roboto Mono', sans-serif;
+	margin: 10px;
+	padding: 5px;
+	border-radius: 5px;
+	border: none;
+	font-size: 20px;
+}
+
+input:focus {
+	outline: none;
+	background-color: rgb(251, 232, 207);
+}
+
+#insertedOn{
+	font-size: 15px;
+	text-decoration: none;
+}
