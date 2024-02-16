@@ -10,37 +10,52 @@
 </head>
 
 <body>
+	<!--  Div where the vue app is mounted-->
 	<div id="app">
 		<h1>Posts</h1>
+		<!--If there are posts, show this Div-->
 		<div v-if="posts.length > 0" class="posts">
-			<ul class="post" v-for="(post) in posts">
-				<li>
+			<!--A div is created for every item in array posts-->
+			<div class="post" v-for="(post) in posts">
+					<!-- Display all the information of the post -->
 					<p>Post Name: {{post.name}}</p>
-					<p>Post content: {{post.content}}</p>
+					<p>Post Summary: {{post.summary}}</p>
 					<p>Author: {{post.author}}</p>
-					<p id="insertedOn">{{post.insertedOn.split('T')[0]}}</p>
+					<img :src="post.postImageUrl">
+					<p id="creationDate">Created: {{post.creationDate.split('T')[0]}}</p>
+					<!-- Buttons to edit, delete and schedule publish. the 2 first are calling a function onclick -->
 					<button v-on:click="deletePost(post)">Delete Post</button>
 					<button v-on:click="editPostBtn(post)">Edit Post</button>
 					<button v-on:click="">Schedule Publish</button>
-				</li>
-			</ul>
+			</div>
 		</div>
+		<!-- If there are no posts, show this -->
 		<p v-else>There are no posts yet</p>
 
+		<!-- Div to create or edit a post -->
 		<div class="createEdit">
-			<h2>{{ editing ? 'Edit post' : 'Create post'}}</h2>
-
 			<form>
+				<!-- This title content will change depending on the status of the boolean variable editing -->
+				<h2>{{ editing ? 'Edit post' : 'Create post'}}</h2>
+				<!-- Inputs for the content of the form. They're automatically added to the form object in data()-->
 				<input type="text" placeholder="Post Name" v-model="form.postName" required>
-				<input type="text" placeholder="Post content" v-model="form.postContent" required>
-				<input type="text" placeholder="Post author" v-model="form.postAuthor" required>
+				<input type="text" placeholder="Summary" maxlength="35" v-model="form.postSummary" required>
+				<!-- <input type="text" placeholder="Content" v-model="form.postContent"> -->
+				<textarea name="postContent" id="postContent" v-model="form.postContent" required></textarea>
+				<select name="author" v-model="form.postAuthor" required>
+					<option value="" disabled selected>Select an author</option>
+					<option value="adria">Adria</option>
+					<option value="pepe">Pedro</option>
+					<option value="juan">Juan</option>
+				</select>
+				<input type="file" name="postImage" @change="saveImage" ref="imgInput">
 			</form>
+			<div class="message"></div>
 			<button v-if="!editing" @click="addPost">Add post</button>
 			<button v-else @click="editPost">Edit post</button>
-			<!-- {{ editing ? <button @click="addPost">Add post</button> : <button @click="addPost">Edit post</button>}} -->
 		</div>
 	</div>
-
+	<!-- this.formData.imageurl = URL.createObjectURL(files[0]); -->
 
 	<script>
 		const { createApp } = Vue;
@@ -56,9 +71,13 @@
 					form: {
 						id: '',
 						postName: '',
+						postSummary: '',
 						postContent: '',
 						postAuthor: '',
-						insertedOn: ''
+						postImageUrl: '',
+						creationDate: '',
+						publicationDate: '',
+						postStatus: ''
 					}
 				}
 			},
@@ -68,30 +87,31 @@
 						this.posts.push({
 							id: this.posts.length + 1,
 							name: this.form.postName,
+							summary: this.form.postSummary,
 							content: this.form.postContent,
 							author: this.form.postAuthor,
-							insertedOn: new Date().toISOString()
+							creationDate: new Date().toISOString(),
+							postImageUrl: this.form.postImageUrl
 						});
 						this.emptyForm();
 					}
+
 				},
 				editPost() {
-					//TODO no coge bien el post con el index
 
 					const postIndex = this.posts.findIndex(post => post.id === this.actualPostId);
-					console.log(postIndex);
 					if (postIndex !== -1) {
 						if (validateForm()) {
 							this.posts[postIndex].name = this.form.postName;
+							this.posts[postIndex].summary = this.form.postSummary;
 							this.posts[postIndex].content = this.form.postContent;
 							this.posts[postIndex].author = this.form.postAuthor;
+							this.posts[postIndex].postImageUrl = this.form.postImageUrl;
+
 							this.emptyForm();
 							this.editing = false;
 						}
-					} else {
-						console.log('No post found');
 					}
-
 				},
 
 				deletePost(post) {
@@ -102,14 +122,26 @@
 				editPostBtn(post) {
 					this.editing = true;
 					this.form.postName = post.name;
+					this.form.postSummary = post.summary;
 					this.form.postContent = post.content;
 					this.form.postAuthor = post.author;
+					this.form.postImageUrl = post.postImageUrl;
+
+
 					this.actualPostId = post.id;
+					window.scrollTo(0, document.body.scrollHeight);
 				},
 				emptyForm() {
 					this.form.postName = '';
 					this.form.postContent = '';
 					this.form.postAuthor = '';
+					this.form.postImageUrl = '';
+					this.$refs.imgInput.value = '';
+					this.form.postSummary = '';
+				},
+				saveImage(event) {
+					let file = event.target.files[0];
+					this.form.postImageUrl = URL.createObjectURL(file);
 				}
 			}
 		}).mount('#app');
@@ -120,12 +152,24 @@
 			let isValid = true;
 			inputs.forEach(input => {
 				if (input.value.trim() === '') {
+					$('.message').text('All fields are required');
 					isValid = false;
 				}
 			});
+			if (document.querySelector('select').value === '' || document.querySelector('textarea').value.trim() === ''){
+				$('.message').text('All fields are required');
+				isValid = false;
+			}
+			if (isValid) {
+				$('.message').text('');
+			}
 			return isValid;
 		}
 	</script>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
