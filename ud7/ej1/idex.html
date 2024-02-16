@@ -40,22 +40,23 @@
 				<!-- Inputs for the content of the form. They're automatically added to the form object in data()-->
 				<input type="text" placeholder="Post Name" v-model="form.postName" required>
 				<input type="text" placeholder="Summary" maxlength="35" v-model="form.postSummary" required>
-				<!-- <input type="text" placeholder="Content" v-model="form.postContent"> -->
 				<textarea name="postContent" id="postContent" v-model="form.postContent" required></textarea>
 				<select name="author" v-model="form.postAuthor" required>
 					<option value="" disabled selected>Select an author</option>
 					<option value="adria">Adria</option>
 					<option value="pepe">Pedro</option>
 					<option value="juan">Juan</option>
+					<option value="sergi">Sergi</option>
 				</select>
 				<input type="file" name="postImage" @change="saveImage" ref="imgInput">
 			</form>
 			<div class="message"></div>
+			<!-- Depending on edditing, one or other button is shown -->
 			<button v-if="!editing" @click="addPost">Add post</button>
 			<button v-else @click="editPost">Edit post</button>
 		</div>
 	</div>
-	<!-- this.formData.imageurl = URL.createObjectURL(files[0]); -->
+
 
 	<script>
 		const { createApp } = Vue;
@@ -63,6 +64,7 @@
 		let app = createApp({
 			data() {
 				return {
+					/* declare variables, array of posts(empty) and a form for the v-model */
 					actualPostId: null,
 					editing: false,
 					posts: [
@@ -82,7 +84,9 @@
 				}
 			},
 			methods: {
+				/* Methods to add, edit and delete posts. Also a method to save the image and empty the form */
 				addPost() {
+					/* Before insert, validates the form*/
 					if (validateForm()) {
 						this.posts.push({
 							id: this.posts.length + 1,
@@ -93,14 +97,17 @@
 							creationDate: new Date().toISOString(),
 							postImageUrl: this.form.postImageUrl
 						});
+						/* After the insert, clear the form inputs */
 						this.emptyForm();
 					}
 
 				},
 				editPost() {
 
+					/* Same as add post but first we find the post whos id is the same as the actualPostId*/
 					const postIndex = this.posts.findIndex(post => post.id === this.actualPostId);
 					if (postIndex !== -1) {
+						/* If the input values are valid, the post from the posts array is modified */
 						if (validateForm()) {
 							this.posts[postIndex].name = this.form.postName;
 							this.posts[postIndex].summary = this.form.postSummary;
@@ -115,10 +122,12 @@
 				},
 
 				deletePost(post) {
+					/* Delete the post from the array with its index*/
 					this.posts.splice(this.posts.indexOf(post), 1);
 					editing = false;
-					// this.posts = this.posts.filter(post => post.id !== postId);
 				},
+
+				/* Add the post values to the form and set editing to true */
 				editPostBtn(post) {
 					this.editing = true;
 					this.form.postName = post.name;
@@ -127,10 +136,12 @@
 					this.form.postAuthor = post.author;
 					this.form.postImageUrl = post.postImageUrl;
 
-
+					/* Updates the actualPostId and scrolls the window to the bottom */
 					this.actualPostId = post.id;
 					window.scrollTo(0, document.body.scrollHeight);
 				},
+
+				/* Sets all the form inputs to empty */
 				emptyForm() {
 					this.form.postName = '';
 					this.form.postContent = '';
@@ -139,6 +150,8 @@
 					this.$refs.imgInput.value = '';
 					this.form.postSummary = '';
 				},
+
+				/* Creates the url for the uploaded image and set it to the form input */
 				saveImage(event) {
 					let file = event.target.files[0];
 					this.form.postImageUrl = URL.createObjectURL(file);
@@ -147,6 +160,7 @@
 		}).mount('#app');
 
 
+		/* Validates the forms by checking if they're not empty. If one of them is, displays the message and return false */
 		function validateForm() {
 			const inputs = document.querySelectorAll('input[required]');
 			let isValid = true;
