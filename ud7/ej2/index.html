@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>EJ2 VUE - Components</title>
+</head>
+
+<body>
+	<div id="app">
+		<h3>Enter an Integer</h3>
+		<input v-model="num" type="number">
+		<p></p><input type="button" value="send" @click="send"></p>
+		<small v-if="error">{{ error }}</small>
+
+		<!-- <Number nombre="5"></Number> -->
+		<Number v-for="n in numbers" :nombre="n" :key="n" v-on:clicked-number="numberSelected"></Number>
+
+		<h3 v-if="selectedItem">The selected number is: {{ selectedItem }}</h3>
+
+	</div>
+
+
+	<script type="module">
+		import Number from "./Number.js";
+
+		const { createApp } = Vue;
+
+		const app = Vue.createApp({
+			data: function () {
+				return {
+					num: null,
+					numbers: [],
+					error: "",
+					selectedItem: null
+				}
+			},
+			components: {
+				Number
+			},
+			methods: {
+				send: function () {
+					this.error = "";
+					this.selectedItem = null;
+
+					if (~~this.num === this.num) {
+
+						//Comprovar si existeis el nombre a la llista
+						if (this.numbers.indexOf(this.num) < 0) {
+							this.numbers.push(this.num);
+							this.num = null;
+						} else {
+							this.error = "This number is already in the list";
+						}
+					} else {
+						this.error = "Please enter an integer";
+					}
+				},
+				numberSelected: function (item) {
+					this.selectedItem = item;
+				}
+			}
+		}).mount('#app');
+
+	</script>
+
+</body>
+
+</html>
