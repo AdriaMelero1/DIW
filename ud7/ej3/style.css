@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Roboto Mono', sans-serif;
+	background-color: rgb(255, 214, 161);
+	color: rgb(107, 23, 23);
+	margin: 40px;
+}
+
+#app {
+	margin-top: 100px;
+	margin-bottom: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 3px solid rgb(223, 130, 130);
+	border-radius: 15px;
+	padding: 15px;
+}
+
+ul {
+	font-size: 30px;
+	list-style: none;
+}
+
+li {
+	font-size: 20px;
+}
+
+.posts, .createEdit {
+	background-color: rgb(251, 200, 134);
+	border-radius: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.post {
+	background-color: rgb(255, 214, 161);
+	padding: 15px;
+	margin: 15px;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.post p {
+	text-decoration-thickness: 1px;
+	text-decoration-line: underline;
+	margin: 10px;
+}
+
+.post img {
+	height: 200px;
+}
+
+button, input::file-selector-button{
+	font-family: 'Roboto Mono', sans-serif;
+	padding: 5px;
+	margin: 5px 10px;
+	border-radius: 5px;
+	border: none;
+	background-color: rgb(107, 23, 23);
+	color: white;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+
+.createEdit {
+	margin: 50px;
+	width: 65%;
+	min-width: 280px;
+	min-height: 200px !important;
+	flex-direction: column;
+	max-width: 1000px;
+}
+
+.createEdit form {
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px;
+	background-color: rgb(255, 214, 161);
+	border-radius: 10px;
+	width: 70%;
+	min-width: 250px;
+	max-width: 420px;
+}
+
+.createEdit input, select, option {
+	font-family: 'Roboto Mono', sans-serif;
+	margin: 10px;
+	padding: 5px;
+	border-radius: 5px;
+	border: none;
+	font-size: 20px;
+	text-align: center;
+	width: 90%;
+}
+
+
+
+input:focus, select:focus, option:focus{
+	outline: none;
+	background-color: rgb(251, 232, 207);
+}
+
+#creationDate{
+	font-size: 15px;
+	text-decoration: none;
+}
+
+textarea {
+	border: 0;
+	border-radius: 5px;
+	width: 90%;
+	height: 150px;
+	padding: 15px;
+	max-width: 500px;
+	max-height: 350px;
+	font-size: 15px;
+}
+
+textarea:focus {
+	outline: none;
+	background-color: rgb(251, 232, 207);
+}
+
+input[type="file"] {
+	margin: 0;
+	font-size: 12px;
+	width: 100%;
+}
+
+.header, .footer {
+	position: fixed;
+	top: 0;
+	text-align: center;
+	padding: 10px;
+	width: 100%;
+	color: #6b1717;
+	background-color: #ffd6a1;
+	font-size: 20px;
+	border-top: 4px solid #000000;
+	border-bottom: 4px solid #000000;
+}
+
+.footer {
+	top: inherit;
+	bottom: 0;
+	font-size: 15px;
+	padding: 0;
+}
+
+.footer span {
+	font-size: 40px;
+}

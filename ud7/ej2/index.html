@@ -16,7 +16,6 @@
 		<p></p><input type="button" value="send" @click="send"></p>
 		<small v-if="error">{{ error }}</small>
 
-		<!-- <Number nombre="5"></Number> -->
 		<Number v-for="n in numbers" :nombre="n" :key="n" v-on:clicked-number="numberSelected"></Number>
 
 		<h3 v-if="selectedItem">The selected number is: {{ selectedItem }}</h3>

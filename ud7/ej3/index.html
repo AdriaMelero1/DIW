@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<title>EJ3 VUE</title>
+</head>
+
+<body>
+	<!--  Div where the vue app is mounted-->
+	<div id="app">
+		<header-vue></header-vue>
+		<div class="posts" v-if="posts.length > 0">
+			<post v-for="p in posts" v-bind:post="p" v-bind:name="p.name" v-on:delete-post="deletePost" v-on:edit-post="editPostBtn"></post>
+		</div>
+		<!-- If there are no posts, show this -->
+		<p v-else>There are no posts yet</p>
+
+		<!-- Div to create or edit a post -->
+		<div class="createEdit">
+			<form>
+				<!-- This title content will change depending on the status of the boolean variable editing -->
+				<h2>{{ editing ? 'Edit post' : 'Create post'}}</h2>
+				<!-- Inputs for the content of the form. They're automatically added to the form object in data()-->
+				<input type="text" placeholder="Post Name" v-model="form.postName" required>
+				<input type="text" placeholder="Summary" maxlength="35" v-model="form.postSummary" required>
+				<textarea name="postContent" id="postContent" v-model="form.postContent" required></textarea>
+				<select name="author" v-model="form.postAuthor" required>
+					<option value="" disabled selected>Select an author</option>
+					<option value="adria">Adria</option>
+					<option value="pepe">Pedro</option>
+					<option value="juan">Juan</option>
+					<option value="sergi">Sergi</option>
+				</select>
+				<input type="file" name="postImage" @change="saveImage" ref="imgInput">
+			</form>
+			<div class="message"></div>
+			<!-- Depending on edditing, one or other button is shown -->
+			<button v-if="!editing" @click="addPost">Add post</button>
+			<button v-else @click="editPost">Edit post</button>
+		</div>
+		<footer-vue></footer-vue>
+	</div>
+
+
+	<script type="module">
+		import HeaderVue from './HeaderVue.js';
+		import FooterVue from './FooterVue.js';
+		import Post from './Post.js';
+
+		const { createApp } = Vue;
+
+		let app = createApp({
+			data() {
+				return {
+					/* declare variables, array of posts(empty) and a form for the v-model */
+					actualPostId: null,
+					editing: false,
+					posts: [
+
+					],
+					form: {
+						id: '',
+						postName: '',
+						postSummary: '',
+						postContent: '',
+						postAuthor: '',
+						postImageUrl: '',
+						creationDate: '',
+						publicationDate: '',
+						postStatus: ''
+					}
+				}
+			},
+			components: {
+				HeaderVue,
+				FooterVue,
+				Post
+			},
+			methods: {
+				/* Methods to add, edit and delete posts. Also a method to save the image and empty the form */
+				addPost() {
+					/* Before insert, validates the form*/
+					if (validateForm()) {
+						this.posts.push({
+							id: this.posts.length + 1,
+							name: this.form.postName,
+							summary: this.form.postSummary,
+							content: this.form.postContent,
+							author: this.form.postAuthor,
+							creationDate: new Date().toISOString(),
+							postImageUrl: this.form.postImageUrl
+						});
+						/* After the insert, clear the form inputs */
+						this.emptyForm();
+					}
+
+				},
+				editPost() {
+
+					/* Same as add post but first we find the post whos id is the same as the actualPostId*/
+					const postIndex = this.posts.findIndex(post => post.id === this.actualPostId);
+					if (postIndex !== -1) {
+						/* If the input values are valid, the post from the posts array is modified */
+						if (validateForm()) {
+							this.posts[postIndex].name = this.form.postName;
+							this.posts[postIndex].summary = this.form.postSummary;
+							this.posts[postIndex].content = this.form.postContent;
+							this.posts[postIndex].author = this.form.postAuthor;
+							this.posts[postIndex].postImageUrl = this.form.postImageUrl;
+
+							this.emptyForm();
+							this.editing = false;
+						}
+					}
+				},
+
+				deletePost(post) {
+					/* Delete the post from the array with its index*/
+					this.posts.splice(this.posts.indexOf(post), 1);
+					this.editing = false;
+				},
+
+				/* Add the post values to the form and set editing to true */
+				editPostBtn(post) {
+					this.editing = true;
+					this.form.postName = post.name;
+					this.form.postSummary = post.summary;
+					this.form.postContent = post.content;
+					this.form.postAuthor = post.author;
+					this.form.postImageUrl = post.postImageUrl;
+
+					/* Updates the actualPostId and scrolls the window to the bottom */
+					this.actualPostId = post.id;
+					window.scrollTo(0, document.body.scrollHeight);
+				},
+
+				/* Sets all the form inputs to empty */
+				emptyForm() {
+					this.form.postName = '';
+					this.form.postContent = '';
+					this.form.postAuthor = '';
+					this.form.postImageUrl = '';
+					this.$refs.imgInput.value = '';
+					this.form.postSummary = '';
+				},
+
+				/* Creates the url for the uploaded image and set it to the form input */
+				saveImage(event) {
+					let file = event.target.files[0];
+					this.form.postImageUrl = URL.createObjectURL(file);
+				}
+			}
+		}).mount('#app');
+
+
+		/* Validates the forms by checking if they're not empty. If one of them is, displays the message and return false */
+		function validateForm() {
+			const inputs = document.querySelectorAll('input[required]');
+			let isValid = true;
+			inputs.forEach(input => {
+				if (input.value.trim() === '') {
+					$('.message').text('All fields are required');
+					isValid = false;
+				}
+			});
+			if (document.querySelector('select').value === '' || document.querySelector('textarea').value.trim() === '') {
+				$('.message').text('All fields are required');
+				isValid = false;
+			}
+			if (isValid) {
+				$('.message').text('');
+			}
+			return isValid;
+		}
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
