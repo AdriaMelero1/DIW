@@ -14,7 +14,9 @@
 	<div id="app">
 		<header-vue></header-vue>
 		<div class="posts" v-if="posts.length > 0">
-			<post v-for="p in posts" v-bind:post="p" v-bind:name="p.name" v-on:delete-post="deletePost" v-on:edit-post="editPostBtn"></post>
+			<post v-for="p in posts" v-bind:post="p" v-bind:name="p.name" 
+				v-on:delete-post="deletePost"
+				v-on:edit-post="editPostBtn"></post>
 		</div>
 		<!-- If there are no posts, show this -->
 		<p v-else>There are no posts yet</p>
@@ -30,10 +32,10 @@
 				<textarea name="postContent" id="postContent" v-model="form.postContent" required></textarea>
 				<select name="author" v-model="form.postAuthor" required>
 					<option value="" disabled selected>Select an author</option>
-					<option value="adria">Adria</option>
-					<option value="pepe">Pedro</option>
-					<option value="juan">Juan</option>
-					<option value="sergi">Sergi</option>
+					<option value="Adria">Adria</option>
+					<option value="Pepe">Pedro</option>
+					<option value="Juan">Juan</option>
+					<option value="Sergi">Sergi</option>
 				</select>
 				<input type="file" name="postImage" @change="saveImage" ref="imgInput">
 			</form>
@@ -94,6 +96,7 @@
 							creationDate: new Date().toISOString(),
 							postImageUrl: this.form.postImageUrl
 						});
+						localStorage.setItem("posts", JSON.stringify(this.posts));
 						/* After the insert, clear the form inputs */
 						this.emptyForm();
 					}
@@ -112,6 +115,8 @@
 							this.posts[postIndex].author = this.form.postAuthor;
 							this.posts[postIndex].postImageUrl = this.form.postImageUrl;
 
+							localStorage.setItem("posts", JSON.stringify(this.posts));
+
 							this.emptyForm();
 							this.editing = false;
 						}
@@ -122,6 +127,8 @@
 					/* Delete the post from the array with its index*/
 					this.posts.splice(this.posts.indexOf(post), 1);
 					this.editing = false;
+					localStorage.setItem("posts", JSON.stringify(this.posts));
+
 				},
 
 				/* Add the post values to the form and set editing to true */
@@ -155,6 +162,13 @@
 				}
 			}
 		}).mount('#app');
+
+
+		window.addEventListener('load', () => {
+			if (localStorage.getItem("posts")) {
+				app.posts = JSON.parse(localStorage.getItem("posts"));
+			}
+		});
 
 
 		/* Validates the forms by checking if they're not empty. If one of them is, displays the message and return false */
