@@ -11,15 +11,21 @@ window.onload = function(){
 				if (currentUser) {
 					const container = document.getElementById('userdata');
 					const avatar = document.createElement("img");
-					const logoutButton = document.createElement("button")
+					const logoutButton = document.createElement("button");
+					const btnPosts = document.createElement("button");
 					logoutButton.onclick = logout;
 					logoutButton.innerText = "Log out";
+					btnPosts.innerText = "Posts Page";
+					btnPosts.addEventListener("click", () => {
+						location.href = "/pages/posts/index.html"
+					});
 					avatar.src = currentUser.avatarurl;
 
 					container.innerHTML = "";
 
 					container.append(avatar)
 					container.append(logoutButton)
+					container.append(btnPosts)
 					if (currentUser.admin) {
 						location.href = "../pages/adminPage.html"
 					} else {

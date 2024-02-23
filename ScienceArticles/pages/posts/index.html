@@ -12,7 +12,7 @@
 <body>
 	<!--  Div where the vue app is mounted-->
 	<div id="app">
-		<header-vue></header-vue>
+		<header-vue v-on:redirect-admin-page="redirect('/pages/index.html')"></header-vue>
 		<div class="posts" v-if="posts.length > 0">
 			<post v-for="p in posts" v-bind:post="p" v-bind:name="p.name" v-on:delete-post="deletePost"
 				v-on:edit-post="editPostBtn"></post>
@@ -158,6 +158,9 @@
 				saveImage(event) {
 					let file = event.target.files[0];
 					this.form.postImageUrl = URL.createObjectURL(file);
+				},
+				redirect(url){
+					location.href = url;
 				}
 			}, mounted() {
 				if (localStorage.getItem("posts")) {
