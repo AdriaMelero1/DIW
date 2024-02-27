@@ -13,12 +13,19 @@
 	<!--  Div where the vue app is mounted-->
 	<div id="app">
 		<header-vue v-on:redirect-admin-page="redirect('/pages/index.html')"></header-vue>
+
+
+		<!-- IN COMPONENT VIEWPOSTS -->
+
 		<div class="posts" v-if="posts.length > 0">
 			<post v-for="p in posts" v-bind:post="p" v-bind:name="p.name" v-on:delete-post="deletePost"
 				v-on:edit-post="editPostBtn"></post>
 		</div>
 		<!-- If there are no posts, show this -->
 		<p v-else>There are no posts yet</p>
+
+
+
 
 		<!-- Div to create or edit a post -->
 		<div class="createEdit">
@@ -43,14 +50,26 @@
 			<button v-if="!editing" @click="addPost">Add post</button>
 			<button v-else @click="editPost">Edit post</button>
 		</div>
-		<footer-vue></footer-vue>
+		
+		
+
+
+		<!-- <router-link to="/">Go home</router-link>
+		<router-link :to="{ name: 'ViewPosts', params: {posts: {{this.posts}}}}">See Posts</router-link>
+			
+		<router-view></router-view>
+
+		
+		<footer-vue></footer-vue> -->
 	</div>
+	<script src="https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js"></script>
 
 
 	<script type="module">
 		import HeaderVue from './HeaderVue.js';
 		import FooterVue from './FooterVue.js';
 		import Post from './Post.js';
+		import router from './router.js';
 
 		const { createApp } = Vue;
 
@@ -60,6 +79,7 @@
 					/* declare variables, array of posts(empty) and a form for the v-model */
 					actualPostId: null,
 					editing: false,
+					name: 'Alberto',
 					posts: [
 
 					],
@@ -182,7 +202,7 @@
 					deep: true
 				}
 			}
-		}).mount('#app');
+		}).use(router).mount('#app');
 
 
 
