@@ -42,7 +42,7 @@ export default {
 		editPost() {
 
 			/* Same as add post but first we find the post whos id is the same as the actualPostId*/
-			const postIndex = this.posts.findIndex(post => post.id === this.actualPostId);
+			const postIndex = posts.findIndex(post => post.id === this.actualPostId);
 			if (postIndex !== -1) {
 				/* If the input values are valid, the post from the posts array is modified */
 				this.posts[postIndex].name = this.form.postName;

@@ -72,15 +72,15 @@
 				editPostBtn(post) {
 					console.log("Edit post btn");
 					this.editing = true;
-					this.form.postName = post.name;
+					/* this.form.postName = post.name;
 					this.form.postSummary = post.summary;
 					this.form.postContent = post.content;
 					this.form.postAuthor = post.author;
 					this.form.postImageUrl = post.postImageUrl;
 
-					/* Updates the actualPostId and scrolls the window to the bottom */
-					this.actualPostId = post.id;
-					window.scrollTo(0, document.body.scrollHeight);
+					/* Updates the actualPostId and scrolls the window to the bottom
+					this.actualPostId = post.id; */
+					this.$router.push("/createPost")
 				},
 
 

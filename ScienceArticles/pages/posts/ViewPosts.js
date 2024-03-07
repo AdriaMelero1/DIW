@@ -3,7 +3,7 @@ import Post from './Post.js';
 export default {
 	name: 'ViewPosts',
 	props: ['posts'],
-	emits: ['deletePost', 'addPost'],
+	emits: ['deletePost', 'addPost', 'editPost'],
 	components: {
 		Post
 	},
