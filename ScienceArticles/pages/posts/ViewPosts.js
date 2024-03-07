@@ -1,6 +1,24 @@
+import Post from './Post.js';
+
 export default {
 	name: 'ViewPosts',
 	props: ['posts'],
+	emits: ['deletePost', 'addPost'],
+	components: {
+		Post
+	},
+	methods: {
+		editPostBtn: function (post) {
+			this.$emit('edit-post', post);
+		},
+		deletePost: function (id) {
+			this.$emit('delete-post', id);
+		},
+		createPost() {
+			console.log("Create post");
+			this.$router.push("/createPost");
+		}
+	},
 	template: `
 	<h1>POSTS VIEW</h1>
 	<div class="posts" v-if="posts.length > 0">
@@ -11,8 +29,7 @@ export default {
 					v-on:edit-post="editPostBtn">
 		</post>
 	</div>
-
-	<!-- If there are no posts, show this -->
-	<p v-else>There are no posts yet</p>
+	<div v-else>There are no posts yet</div>
+	<button @click="createPost">Create Post</button>
 	`,
 }

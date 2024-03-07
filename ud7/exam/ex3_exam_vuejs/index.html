@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ex3</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Container where the content and components are mounted -->
+  <div id="app">
+    <router-view v-on:checkcredentials="checkcredentials(user)" v-bind="user"></router-view>
+  </div>
+
+  <script type="module">
+    //import router
+    import router from './router.js';
+
+    const { createApp } = Vue;
+
+    createApp({
+      data: function () {
+        return {
+          users: []
+        }
+      },
+      methods: {
+
+        checkcredentials(user) {
+
+          console.log("Checking credentials" + user.username);
+          //You need to implement this method in order to check user credentials entered in the Login component.
+
+          //You can filter users with this method: login is the username of the localstorage (users) and user.user the one you are passing to check 
+          //this.users.filter(u => u.login === user.user);
+
+
+        }
+      },
+      //When the app is mounted, go to /user, (so you can test the button go back) and get and parse users from localstorage
+      mounted() {
+        console.log("Mounted");
+        this.$router.push("/user");
+
+        
+        this.users = JSON.parse(localStorage.getItem("users"));
+      }
+
+      //Mount app and use router
+    }).use(router).mount("#app");
+
+  </script>
+
+</body>
+
+</html>

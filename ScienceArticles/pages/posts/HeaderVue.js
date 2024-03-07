@@ -3,7 +3,7 @@ export default {
 	template: `
 		<div class='header'>
 			<button id="btnAdminPage"  v-on:click="$emit('redirect-admin-page')">Home Page</button>
-			<h1>-POSTS-</h1>
+			<h1>-POSTS APP-</h1>
 		</div>
 	`,
 }

@@ -4,6 +4,7 @@ export default {
 	emits: ['delete-post', 'edit-post'],
 	methods: {
 		// TWO WAYS OF DOING THE SAME
+		
 		// deletePost: function(post) {
 		// 	this.$emit('delete-post', post);
 		// },
