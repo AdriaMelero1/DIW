@@ -1,0 +1,63 @@
+
+/* COLOR PALETTE
+#e07a5f
+#f4f1de
+#a882dd
+#3d405b
+*/
+h2{
+    color: #a882dd !important;
+}
+
+body{
+    font-family: Oswald !important;
+    background-color: #f4f1de !important;
+    margin: 0px !important;
+    background-image: url();
+}
+.navbarr{
+    background-color: #3d405b;
+    margin: 0px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.titulo{
+    font-size: 50px;
+    color: #f4f1de;
+}
+
+.post{
+    margin: 50px;  
+}
+
+.searchbar{
+    background-color: #3d405b;
+    height: 50px;
+}
+
+.tags{
+    background-color: #3d405b;
+    height: 50px;
+    padding: 5px;
+    padding-left: 20px;
+}
+
+.tags h2{
+    color: #e07a5f !important;
+}
+
+input[type="text"]{
+    background-color: #3d405b;
+    border: 0;
+    width: 80%;
+    height: 100%;
+    color: #f4f1de;
+    font-size: 20px;
+}
+
+select, option{
+    background-color: #f4f1de;
+    border: 0;
+    border-radius: 5px;
+}

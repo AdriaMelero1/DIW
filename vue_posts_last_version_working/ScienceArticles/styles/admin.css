@@ -1,0 +1,33 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: bisque;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h1 {
+	font-size: 50px;
+	color: rgb(116, 34, 19);
+}
+
+
+button {
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	padding: 5px 15px;
+	border: 0;
+	background-color: rgb(116, 34, 19);
+	color: aliceblue;
+}
+
+#btnPosts {
+	left: 15px;
+	right: inherit;
+}

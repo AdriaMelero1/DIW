@@ -8,7 +8,7 @@ let router = VueRouter.createRouter({
 	routes: [
 		{ path: '/viewPosts', name: 'ViewPosts', component: ViewPosts },
 		{ path: '/createPost', name: 'createPost', component: CreatePost },
-		{ path: '/editPost', name: 'editPost', component: CreatePost }
+		{ path: '/editPost/:post', name: 'editPost', component: CreatePost }
 	]
 });
 

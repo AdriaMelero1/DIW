@@ -49,47 +49,17 @@
 				ViewPosts
 			},
 			methods: {
-				addPost(post) {
-					console.log("Adding post");
-					console.log(post);
-					this.posts.push(post);
-
-				},
-				editPost() {
-
-					/* Same as add post but first we find the post whos id is the same as the actualPostId*/
-					const postIndex = posts.findIndex(post => post.id === this.actualPostId);
-					if (postIndex !== -1) {
-						/* If the input values are valid, the post from the posts array is modified */
-						this.posts[postIndex].name = this.form.postName;
-						this.posts[postIndex].summary = this.form.postSummary;
-						this.posts[postIndex].content = this.form.postContent;
-						this.posts[postIndex].author = this.form.postAuthor;
-						this.posts[postIndex].postImageUrl = this.form.postImageUrl;
-
-						localStorage.setItem("posts", JSON.stringify(this.posts));
-
-						this.emptyForm();
-						this.editing = false;
-
-					}
-				},
-				/* Creates the url for the uploaded image and set it to the form input */
-				saveImage(event) {
-					let file = event.target.files[0];
-					this.form.postImageUrl = URL.createObjectURL(file);
-				},
-				/* Sets all the form inputs to empty */
-				emptyForm() {
-					this.form.postName = '';
-					this.form.postContent = '';
-					this.form.postAuthor = '';
-					this.form.postImageUrl = '';
-					this.$refs.imgInput.value = '';
-					this.form.postSummary = '';
-				},
-
 				/* Methods to add, edit and delete posts. Also a method to save the image and empty the form */
+				addPost(post) {
+					/* Before insert, validates the form*/
+					this.posts.push(post);
+					localStorage.setItem("posts", JSON.stringify(this.posts));
+					/* After the insert, clear the form inputs */
+					console.log("Post added: ");
+
+					console.log(post);
+
+				},
 				deletePost(post) {
 					/* Delete the post from the array with its index*/
 					this.posts.splice(this.posts.indexOf(post), 1);
@@ -110,7 +80,7 @@
 
 					/* Updates the actualPostId and scrolls the window to the bottom
 					this.actualPostId = post.id; */
-					this.$router.push("/editPost")
+					this.$router.push("/createPost")
 				},
 
 
@@ -125,7 +95,10 @@
 					console.log("There are post");
 					this.$router.push("/viewPosts");
 				} else {
-					this.posts = [];
+					console.log("There are no post");
+
+					this.$router.push("/createPost");
+
 				}
 			},
 			watch: {
@@ -146,24 +119,6 @@
 		}).use(router).mount('#app');
 
 
-		function validateForm() {
-			const inputs = document.querySelectorAll('input[required]');
-			let isValid = true;
-			inputs.forEach(input => {
-				if (input.value.trim() === '') {
-					$('.message').text('All fields are required');
-					isValid = false;
-				}
-			});
-			if (document.querySelector('select').value === '' || document.querySelector('textarea').value.trim() === '') {
-				$('.message').text('All fields are required');
-				isValid = false;
-			}
-			if (isValid) {
-				$('.message').text('');
-			}
-			return isValid;
-		}
 
 		/* Validates the forms by checking if they're not empty. If one of them is, displays the message and return false */
 
