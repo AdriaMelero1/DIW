@@ -29,8 +29,40 @@ export default {
 				postImageUrl: this.form.postImageUrl
 			}
 			
+			if(this.validateForm()){
 				this.$emit('add-post', post);
 				this.$router.push("/viewPosts")
+
+			}
+		},
+		emptyForm() {
+			this.form.postName = '';
+			this.form.postContent = '';
+			this.form.postAuthor = '';
+			this.form.postImageUrl = '';
+			this.$refs.imgInput.value = '';
+			this.form.postSummary = '';
+		},
+		validateForm() {
+			const inputs = document.querySelectorAll('input[required]');
+			let isValid = true;
+			inputs.forEach(input => {
+				if (input.value.trim() === '') {
+					$('.message').text('All fields are required');
+					isValid = false;
+				}
+			});
+			if (document.querySelector('select').value === '' || document.querySelector('textarea').value.trim() === '') {
+				$('.message').text('All fields are required');
+				isValid = false;
+			}
+			if (isValid) {
+				$('.message').text('');
+			}
+			return isValid;
+		}, 
+		editPost() {
+			
 		}
 	},
 	template: `

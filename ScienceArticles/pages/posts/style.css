@@ -1,5 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+/* CSS HEX 
+--eggshell: #f4f1deff;
+--burnt-sienna: #e07a5fff;
+--delft-blue: #3d405bff;
+--cambridge-blue: #81b29aff;
+--sunset: #f2cc8fff;
+
+ */
 
 * {
 	margin: 0;
@@ -8,9 +16,9 @@
 }
 
 body {
-	font-family: 'Roboto Mono', sans-serif;
-	background-color: rgb(255, 214, 161);
-	color: rgb(107, 23, 23);
+	font-family: 'Inter', sans-serif;
+	background-color: #f4f1deff;
+	color: #3D405B;
 	margin: 40px;
 }
 
@@ -20,7 +28,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border: 3px solid rgb(223, 130, 130);
+	border: 3px solid #81B29A;
 	border-radius: 15px;
 	padding: 15px;
 }
@@ -35,7 +43,7 @@ li {
 }
 
 .posts, .createEdit {
-	background-color: rgb(251, 200, 134);
+	background-color: #f4f1deff;
 	border-radius: 15px;
 	display: flex;
 	flex-wrap: wrap;
@@ -46,7 +54,7 @@ li {
 }
 
 .post {
-	background-color: rgb(255, 214, 161);
+	background-color: #81B29A;
 	padding: 15px;
 	margin: 15px;
 	border-radius: 10px;
@@ -69,7 +77,7 @@ button, input::file-selector-button{
 	margin: 5px 10px;
 	border-radius: 5px;
 	border: none;
-	background-color: rgb(107, 23, 23);
+	background-color: #3D405B;
 	color: white;
 	cursor: pointer;
 	font-size: 15px;
@@ -91,7 +99,7 @@ button, input::file-selector-button{
 	flex-direction: column;
 	align-items: center;
 	padding: 10px;
-	background-color: rgb(255, 214, 161);
+	background-color: #81B29A;
 	border-radius: 10px;
 	width: 70%;
 	min-width: 250px;
@@ -113,7 +121,7 @@ button, input::file-selector-button{
 
 input:focus, select:focus, option:focus{
 	outline: none;
-	background-color: rgb(251, 232, 207);
+	background-color: #F4F1DE;
 }
 
 #creationDate{
@@ -134,7 +142,7 @@ textarea {
 
 textarea:focus {
 	outline: none;
-	background-color: rgb(251, 232, 207);
+	background-color: #F4F1DE;
 }
 
 input[type="file"] {
@@ -149,11 +157,11 @@ input[type="file"] {
 	text-align: center;
 	padding: 10px;
 	width: 100%;
-	color: #6b1717;
-	background-color: #ffd6a1;
+	color: #3D405B;
+	background-color: #F4F1DE;
 	font-size: 20px;
-	border-top: 4px solid #000000;
-	border-bottom: 4px solid #000000;
+	border-top: 4px solid #81B29A;
+	border-bottom: 4px solid #81B29A;
 }
 
 .footer {

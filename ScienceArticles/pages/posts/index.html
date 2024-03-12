@@ -14,9 +14,9 @@
 	<div id="app">
 		<header-vue v-on:redirect-admin-page="redirect('/pages/index.html')"></header-vue>
 
-		<router-view v-bind:posts="posts" v-on:edit-post="editPostBtn" v-bind:editing="editing" @add-post="addPost"
-			v-on:delete-post="deletePost"></router-view>
-		<!--  -->
+		<router-view :posts="posts" :editing="editing" :posttoedit="posttoedit" @add-post="addPost"
+			@delete-post="deletePost" @edit-post="editPostBtn">
+		</router-view>
 
 
 		<footer-vue></footer-vue>
@@ -28,35 +28,35 @@
 		import HeaderVue from './HeaderVue.js';
 		import FooterVue from './FooterVue.js';
 		import router from './router.js';
-		import ViewPosts from './ViewPosts.js';
+		import store from "./store.js";
 
+		const pinia = Pinia.createPinia();
 		const { createApp } = Vue;
 
 		let app = createApp({
+			computed: {
+				...Pinia.mapState(store, ['posts'])
+			},
 			data() {
 				return {
 					/* declare variables, array of posts(empty) and a form for the v-model */
 					actualPostId: null,
 					editing: false,
-					posts: [
-
-					],
+					posts: [],
+					posttoedit: null,
 				}
 			},
 			components: {
 				HeaderVue,
-				FooterVue,
-				ViewPosts
+				FooterVue
 			},
 			methods: {
-				addPost(post) {
-					console.log("Adding post");
-					console.log(post);
-					this.posts.push(post);
+				...Pinia.mapActions(store, ['addPost']),
 
+				addPost(post) {
+					this.posts.push(post);
 				},
 				editPost() {
-
 					/* Same as add post but first we find the post whos id is the same as the actualPostId*/
 					const postIndex = posts.findIndex(post => post.id === this.actualPostId);
 					if (postIndex !== -1) {
@@ -80,14 +80,7 @@
 					this.form.postImageUrl = URL.createObjectURL(file);
 				},
 				/* Sets all the form inputs to empty */
-				emptyForm() {
-					this.form.postName = '';
-					this.form.postContent = '';
-					this.form.postAuthor = '';
-					this.form.postImageUrl = '';
-					this.$refs.imgInput.value = '';
-					this.form.postSummary = '';
-				},
+
 
 				/* Methods to add, edit and delete posts. Also a method to save the image and empty the form */
 				deletePost(post) {
@@ -123,10 +116,10 @@
 					this.posts = JSON.parse(localStorage.getItem("posts"));
 					console.log(this.posts);
 					console.log("There are post");
-					this.$router.push("/viewPosts");
 				} else {
 					this.posts = [];
 				}
+				this.$router.push("/viewPosts");
 			},
 			watch: {
 				editing(newValue) {
@@ -143,29 +136,7 @@
 					deep: true
 				}
 			}
-		}).use(router).mount('#app');
-
-
-		function validateForm() {
-			const inputs = document.querySelectorAll('input[required]');
-			let isValid = true;
-			inputs.forEach(input => {
-				if (input.value.trim() === '') {
-					$('.message').text('All fields are required');
-					isValid = false;
-				}
-			});
-			if (document.querySelector('select').value === '' || document.querySelector('textarea').value.trim() === '') {
-				$('.message').text('All fields are required');
-				isValid = false;
-			}
-			if (isValid) {
-				$('.message').text('');
-			}
-			return isValid;
-		}
-
-		/* Validates the forms by checking if they're not empty. If one of them is, displays the message and return false */
+		}).use(router, pinia).mount('#app');
 
 	</script>
 
